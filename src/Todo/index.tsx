@@ -1,20 +1,45 @@
-import React from "react";
-import Add from "./Add";
-import Display from "./Display";
+import React, { ReactNode } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-const Todo = () => {
+interface IPropType {
+  children: ReactNode;
+}
+
+const variant = {
+  hidden: {
+    opacity: 0,
+    y: "60px",
+  },
+  show: {
+    opacity: 1,
+    y: "0px",
+    transition: {
+      duration: 0.5,
+      ease: "easeIn",
+      type: "Spring",
+      stiffness: 100,
+      staggerChildren: 0.5,
+    },
+  },
+};
+
+const Todo: React.FC<IPropType> = ({ children }) => {
   return (
-    <div className="max-w-full h-screen bg-sky-600">
-      <div className="w-1/2 mx-auto flex flex-col items-center py-5">
-        <h1 className="font-bold my-5 text-3xl text-white">
-          Todo App with Redux Toolkit
-        </h1>
-        <div className="flex flex-col">
-          <Add />
-          <Display />
-        </div>
+    <AnimatePresence>
+      <div className="max-w-full h-screen bg-sky-600">
+        <motion.div
+          initial="hidden"
+          animate="show"
+          variants={variant}
+          className="w-1/2 mx-auto flex flex-col items-center py-5"
+        >
+          <h1 className="font-bold my-5 text-3xl text-white">
+            Todo App with Redux Toolkit
+          </h1>
+          <div className="flex flex-col">{children}</div>
+        </motion.div>
       </div>
-    </div>
+    </AnimatePresence>
   );
 };
 

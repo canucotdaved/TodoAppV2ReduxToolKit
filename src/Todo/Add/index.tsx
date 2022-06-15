@@ -2,11 +2,30 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTodos } from "../../redux/reducer";
 import { AppDispatch } from "../../redux/store";
+import { v4 as uuidv4 } from "uuid";
 
 const Add = () => {
   const [title, setTitle] = useState("");
   const [description, setDiscription] = useState("");
   const dispatch = useDispatch<AppDispatch>();
+
+  const inputHandler = () => {
+    if (title === "" || description === "") {
+      alert("Input is requred");
+    } else {
+      dispatch(
+        addTodos({
+          title,
+          description,
+          completed: false,
+          dateAdded: new Date(),
+          id: uuidv4(),
+        })
+      );
+      setDiscription("");
+      setTitle("");
+    }
+  };
 
   return (
     <div className="flex flex-row items-center justify-center">
@@ -26,11 +45,7 @@ const Add = () => {
       />
       <button
         className="text-white p-3 rounded bg-green-500"
-        onClick={() => {
-          dispatch(addTodos(title, description));
-          setDiscription("");
-          setTitle("");
-        }}
+        onClick={() => inputHandler()}
       >
         Add Task
       </button>

@@ -1,49 +1,51 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { v4 as uuidv4 } from "uuid";
 interface IinitialState {
+  todo: Array<Todo>;
+}
+
+interface Todo {
   id: string;
   title: string;
   description: string;
-  dateAdded: Date;
-  status: String;
+  dateAdded: any;
   completed: boolean;
 }
+const initialState: IinitialState = {
+  todo: [],
+};
 
-const initialState: IinitialState[] = [];
+console.log(initialState, `😡`);
 
 const dataSlice = createSlice({
   name: "Todo",
   initialState,
   reducers: {
-    addTodos: {
-      reducer: (state, action: PayloadAction<IinitialState>) => {
-        state.push(action.payload);
-      },
-      prepare: (title: string, description: string) => ({
-        payload: {
-          id: uuidv4(),
-          title,
-          description,
-          dateAdded: new Date(),
-          status: "Active",
-          completed: false,
-        } as IinitialState,
-      }),
+    addTodos(state, action) {
+      return {
+        ...state,
+        todo: [...state.todo, action.payload],
+      };
     },
-    removeTodo(state, action: PayloadAction<string>) {
-      const index = state.findIndex((todo) => todo.id === action.payload);
-      state.splice(index, 1);
-    },
-    setTodoStatus(
-      state,
-      action: PayloadAction<{ completed: boolean; id: string }>
-    ) {
-      const index = state.findIndex((todo) => todo.id === action.payload.id);
-      state[index].completed = action.payload.completed;
-    },
-    default: (state) => {
-      return state;
-    },
+    // removeTodo(state, action: PayloadAction<string>) {
+    //   const index = state.findIndex((todo) => todo.id === action.payload);
+    //   return state.splice(index, 1);
+    // },
+    // setTodoStatus(
+    //   state,
+    //   action: PayloadAction<{ completed: boolean; id: string }>
+    // ) {
+    //   const index = state.findIndex((todo) => todo.id === action.payload.id);
+    //   state[index].completed = action.payload.completed;
+    //   return state;
+    // },
+    // editTodo(state, action: PayloadAction<{ title: string; id: string }>) {
+    //   const index = state.findIndex((todo) => todo.id === action.payload.id);
+    //   state[index].title = action.payload.title;
+    //   return state;
+    // },
+    // default: (state) => {
+    //   return state;
+    // },
   },
 });
 
