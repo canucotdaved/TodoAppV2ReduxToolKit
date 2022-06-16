@@ -18,7 +18,7 @@ const Add = () => {
           title,
           description,
           completed: false,
-          dateAdded: new Date(),
+          dateAdded: Date.now(),
           id: uuidv4(),
         })
       );

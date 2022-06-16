@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Card as Cards, Dropdown } from "flowbite-react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
+import { updateTodo } from "../../redux/reducer";
 
 const variant = {
   hidden: {
@@ -39,15 +40,12 @@ const Card: React.FC<IPropTypes> = ({
     textInput.current.focus();
   };
 
-  // const editHandler = (e: any, id: string, title: string) => {
-  //   //@ts-ignore
-  //   if (e.which === 13) {
-  //     dispatch(editTodo({ id, title: e.target.value }));
-  //     setDisabled(true);
-  //   } else {
-  //     return;
-  //   }
-  // };
+  const editHandler = (e: any, id: string) => {
+    if (e.which === 13) {
+      dispatch(updateTodo({ id, title: e.target.value }));
+      setDisabled(!disable);
+    }
+  };
 
   return (
     <motion.div
@@ -89,10 +87,11 @@ const Card: React.FC<IPropTypes> = ({
               type="text"
               className={`text-base text-gray-800 font-bold border-0 p-0 focus:ring-1 focus:border ${
                 completed ? `line-through	` : null
-              }`}
+              } ${!disable ? "ring-1 p-2 " : null}`}
               ref={textInput}
               defaultValue={title}
               disabled={disable}
+              onKeyPress={(e: any) => editHandler(e, id)}
             />
 
             <p className="text-sm text-gray-600 py-1">{description}</p>

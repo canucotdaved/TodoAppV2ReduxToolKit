@@ -4,16 +4,17 @@ import Card from "../Card";
 import { AppDispatch, RootState } from "../../redux/store";
 import { AnimatePresence } from "framer-motion";
 import moment from "moment";
+import { removeTodo, CompleteTodo } from "../../redux/reducer";
 const Display = () => {
   const dispatch = useDispatch<AppDispatch>();
   const todoList = useSelector((state: RootState) => state.todo);
 
-  const Remove = (id: string) => {
-    console.log("dasdasdas");
+  const completeHandler = (id: string, completed: boolean) => {
+    dispatch(CompleteTodo({ id, completed }));
   };
 
-  const completeHandler = (id: string, completed: boolean) => {
-    console.log("dasdasdas");
+  const removerHandler = (id: string) => {
+    dispatch(removeTodo({ id }));
   };
 
   console.log(todoList);
@@ -28,7 +29,7 @@ const Display = () => {
             title={item.title}
             description={item.description}
             complete={() => completeHandler(item.id, !item.completed)}
-            Delete={() => Remove(item.id)}
+            Delete={() => removerHandler(item.id)}
             date={moment(item.date).fromNow()}
             completed={item.completed}
           />
