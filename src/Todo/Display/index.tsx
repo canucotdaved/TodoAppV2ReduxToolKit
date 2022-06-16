@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Card from "../Card";
 import { AppDispatch, RootState } from "../../redux/store";
@@ -7,6 +7,7 @@ import moment from "moment";
 import { removeTodo, CompleteTodo } from "../../redux/reducer";
 const Display = () => {
   const dispatch = useDispatch<AppDispatch>();
+
   const todoList = useSelector((state: RootState) => state.todo);
 
   const completeHandler = (id: string, completed: boolean) => {
@@ -16,8 +17,6 @@ const Display = () => {
   const removerHandler = (id: string) => {
     dispatch(removeTodo({ id }));
   };
-
-  console.log(todoList);
 
   return (
     <AnimatePresence>
