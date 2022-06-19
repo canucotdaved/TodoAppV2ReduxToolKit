@@ -9,7 +9,7 @@ import Button from "../../components/buttons";
 const Display = () => {
   const dispatch = useDispatch<AppDispatch>();
   const todoList = useSelector((state: RootState) => state.todo);
-  const [sort, setSort] = useState("");
+  const [sort, setSort] = useState("All");
 
   const completeHandler = (id: string, completed: boolean) => {
     dispatch(CompleteTodo({ id, completed }));
