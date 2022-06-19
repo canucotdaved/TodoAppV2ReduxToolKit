@@ -28,7 +28,7 @@ const Add = () => {
   };
 
   return (
-    <div className="flex flex-row items-center justify-center">
+    <div className="flex flex-col md:flex-row items-center justify-center">
       <input
         type="text"
         className="p-3 font-mono rounded"

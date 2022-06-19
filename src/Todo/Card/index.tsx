@@ -90,8 +90,10 @@ const Card: React.FC<IPropTypes> = ({
         <div className="flex flex-col">
           <input
             type="text"
-            className={`text-base text-gray-800 font-bold border-0 p-0 focus:ring-1 focus:border ${
-              completed ? `line-through bg-green-400	` : null
+            className={`text-base  font-bold border-0 p-0 focus:ring-1 focus:border ${
+              completed
+                ? `line-through bg-green-400 text-white	`
+                : `text-gray-800`
             } ${!disable ? "ring-1 p-2 " : null}`}
             ref={textInput}
             defaultValue={title}

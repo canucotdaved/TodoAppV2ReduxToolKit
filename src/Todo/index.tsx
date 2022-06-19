@@ -30,9 +30,9 @@ const Todo: React.FC<IPropType> = ({ children }) => {
         initial="hidden"
         animate="show"
         variants={variant}
-        className="w-1/2 mx-auto flex flex-col items-center py-5"
+        className="w-full md:w-1/2 mx-auto flex flex-col items-center py-5"
       >
-        <h1 className="font-bold my-5 text-3xl text-white">
+        <h1 className="font-bold my-5 text-3xl text-center text-white">
           Todo App with Redux Toolkit
         </h1>
         <div className="flex flex-col">{children}</div>
