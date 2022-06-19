@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { IPropTypes } from "./types";
 import { motion } from "framer-motion";
-import { Card as Cards, Dropdown } from "flowbite-react";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../redux/store";
 import { updateTodo } from "../../redux/reducer";
